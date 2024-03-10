@@ -17,7 +17,7 @@ app.use(loginRoutes);
 const offerRoutes = require("./routes/offer");
 app.use(offerRoutes);
 
-mongoose.connect("process.env.MONGODB_URI");
+mongoose.connect(process.env.MONGODB_URI);
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
