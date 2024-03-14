@@ -9,14 +9,8 @@ const Signup = require("../models/Signup");
 router.post("/user/login", async (req, res) => {
   try {
     const user = await Signup.findOne({ email: req.body.email });
-    // console.log(user.account);
-
-    // console.log(req.body.password);
-    // console.log(user.salt);
 
     const hash2 = SHA256(req.body.password + user.salt).toString(encBase64);
-
-    // console.log(hash2);
 
     if (hash2 === user.hash) {
       res.json({ _id: user._id, token: user.token, account: user.account });

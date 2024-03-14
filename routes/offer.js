@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const cloudinary = require("cloudinary");
-const fileUpload = require("express-fileupload"); // ne pas oublier d'installer ca sur npm exprees file upload
+const fileUpload = require("express-fileupload");
 
 const isAuthenticated = require("./middlewares/isAuthenticated");
 const Offer = require("../models/Offer");
@@ -14,9 +14,7 @@ router.post(
   fileUpload(),
   async (req, res) => {
     try {
-      //   const pictureToUpload = req.files.picture; // on met dans un const l'objet picture
-      const convertedFile = convertToBase64(req.files.picture); // ou je peux faire ca aussi
-      // ici on upload l'objet picture convertie en base 64
+      const convertedFile = convertToBase64(req.files.picture);
 
       const newOffer = new Offer({
         product_name: req.body.title,
@@ -28,9 +26,6 @@ router.post(
           { etat: req.body.condition },
           { emplacement: req.body.city },
         ],
-        // product_image: {
-        //   picture: result,
-        // },
         owner: req.user,
       });
 
